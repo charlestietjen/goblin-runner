@@ -26,4 +26,7 @@ func _process(delta):
 			print(jumpTime)
 	if is_on_floor():
 		jumpTime = 0
+		$AnimationTree.set('parameters/move_state/current', 1)
+	else:
+		$AnimationTree.set('parameters/move_state/current', 0)
 	velocity = move_and_slide(velocity, Vector2.UP)
