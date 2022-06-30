@@ -3,7 +3,7 @@ extends KinematicBody2D
 
 # Declare member variables here. Examples:
 export var gravity = 10
-export var jumpStrength = -200
+export var jumpStrength = -250
 export var jumpMaximum = 0.6
 var velocity = Vector2()
 var jumpTime = 0
@@ -15,18 +15,21 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	velocity.y += gravity
-	if jumpTime <= jumpMaximum:
-		if Input.is_action_just_pressed("jump"):
-			velocity.y += jumpStrength
-		if Input.is_action_pressed("jump"):
-			velocity.y += jumpStrength * delta
-			jumpTime += delta
-			print(jumpTime)
+func _process(_delta):
+	if !is_on_floor():
+		velocity.y += gravity
+	if is_on_floor() && Input.is_action_just_pressed("jump"):
+		velocity.y += jumpStrength
 	if is_on_floor():
-		jumpTime = 0
 		$AnimationTree.set('parameters/move_state/current', 1)
 	else:
 		$AnimationTree.set('parameters/move_state/current', 0)
 	velocity = move_and_slide(velocity, Vector2.UP)
+
+
+func _on_obstacleEntry_body_entered(body):
+	print(body)
+
+
+func _on_skeleton_body_entered(body):
+	print(body) # Replace with function body.

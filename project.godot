@@ -14,6 +14,13 @@ config/name="goblinRunner"
 run/main_scene="res://Game.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/width=800
+window/handheld/orientation="portrait"
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
+
 [input]
 
 jump={
