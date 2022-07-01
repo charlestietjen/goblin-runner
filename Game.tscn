@@ -1,8 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://goblin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://platformScene.tscn" type="PackedScene" id=2]
 [ext_resource path="res://GameController.gd" type="Script" id=3]
+[ext_resource path="res://music/bgm_no_loop.ogg" type="AudioStream" id=4]
+[ext_resource path="res://sfx/hit.wav" type="AudioStream" id=6]
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 10, 114.5 )
@@ -63,10 +65,11 @@ position = Vector2( 417, 11 )
 
 [node name="gameOverLabel" type="RichTextLabel" parent="."]
 visible = false
-margin_left = 60.0
-margin_top = -96.0
-margin_right = 167.0
-margin_bottom = -45.0
+margin_left = 44.0
+margin_top = -117.0
+margin_right = 151.0
+margin_bottom = -66.0
+rect_scale = Vector2( 1.381, 1.331 )
 custom_colors/default_color = Color( 1, 0, 0, 1 )
 text = "Game Over :(
 
@@ -86,13 +89,35 @@ shape = SubResource( 6 )
 action = "jump"
 
 [node name="startInstructions" type="RichTextLabel" parent="."]
-margin_left = 28.0
-margin_top = -166.0
-margin_right = 203.0
-margin_bottom = -60.0
+margin_left = 15.0
+margin_top = -197.0
+margin_right = 190.0
+margin_bottom = -91.0
+rect_scale = Vector2( 1.162, 1.16 )
 text = "Press space, click your mouse or tap the screen to jump!
 
 Casual reminder: Avoid spooky skeletons."
+
+[node name="bgmPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -10.487
+
+[node name="hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 6 )
+
+[node name="scoreLabel" type="Label" parent="."]
+margin_left = 159.0
+margin_top = -215.0
+margin_right = 202.0
+margin_bottom = -201.0
+text = "Score: "
+
+[node name="scoreCount" type="Label" parent="."]
+margin_left = 200.0
+margin_top = -215.0
+margin_right = 240.0
+margin_bottom = -201.0
+text = "0"
 
 [connection signal="area_entered" from="platformEnd" to="." method="_on_platformEnd_area_entered"]
 [connection signal="area_exited" from="platformStart" to="." method="_on_platformStart_area_exited"]

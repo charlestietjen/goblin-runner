@@ -19,6 +19,7 @@ func _process(_delta):
 	if !is_on_floor():
 		velocity.y += gravity
 	if is_on_floor() && Input.is_action_just_pressed("jump"):
+		$jump.play()
 		velocity.y += jumpStrength
 	if is_on_floor():
 		$AnimationTree.set('parameters/move_state/current', 1)
@@ -27,9 +28,9 @@ func _process(_delta):
 	velocity = move_and_slide(velocity, Vector2.UP)
 
 
-func _on_obstacleEntry_body_entered(body):
-	print(body)
-
-
-func _on_skeleton_body_entered(body):
-	print(body) # Replace with function body.
+#func _on_obstacleEntry_body_entered(body):
+#	print(body)
+#
+#
+#func _on_skeleton_body_entered(body):
+#	print(body) # Replace with function body.
