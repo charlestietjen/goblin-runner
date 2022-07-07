@@ -7,6 +7,7 @@ export var jumpStrength = -250
 export var jumpMaximum = 0.6
 var velocity = Vector2()
 var jumpTime = 0
+var disabledControls = false
 
 
 # Called when the node enters the scene tree for the first time.
@@ -18,7 +19,7 @@ func _ready():
 func _process(_delta):
 	if !is_on_floor():
 		velocity.y += gravity
-	if is_on_floor() && Input.is_action_just_pressed("jump"):
+	if is_on_floor() && !disabledControls && Input.is_action_just_pressed("jump"):
 		$jump.play()
 		velocity.y += jumpStrength
 	if is_on_floor():
@@ -28,9 +29,5 @@ func _process(_delta):
 	velocity = move_and_slide(velocity, Vector2.UP)
 
 
-#func _on_obstacleEntry_body_entered(body):
-#	print(body)
-#
-#
-#func _on_skeleton_body_entered(body):
-#	print(body) # Replace with function body.
+func disableControls():
+	disabledControls = true

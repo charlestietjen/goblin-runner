@@ -10,7 +10,8 @@ config_version=4
 
 [application]
 
-config/name="goblinRunner"
+config/name="Goblin Runner"
+config/description="2D endless runner that's definitely not the same as any other 2D endless runners."
 run/main_scene="res://Game.tscn"
 config/icon="res://icon.png"
 

@@ -24,6 +24,7 @@ extents = Vector2( 135, 145 )
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 3 )
+secret = "bongoongo"
 
 [node name="platformNode" type="Node2D" parent="."]
 position = Vector2( 407.982, 18.682 )
@@ -65,15 +66,13 @@ position = Vector2( 417, 11 )
 
 [node name="gameOverLabel" type="RichTextLabel" parent="."]
 visible = false
-margin_left = 44.0
-margin_top = -117.0
-margin_right = 151.0
-margin_bottom = -66.0
+margin_left = 58.0
+margin_top = -138.0
+margin_right = 147.0
+margin_bottom = -122.0
 rect_scale = Vector2( 1.381, 1.331 )
 custom_colors/default_color = Color( 1, 0, 0, 1 )
-text = "Game Over :(
-
-Jump to Restart"
+text = "Game Over :("
 fit_content_height = true
 scroll_active = false
 
@@ -96,7 +95,7 @@ margin_bottom = -91.0
 rect_scale = Vector2( 1.162, 1.16 )
 text = "Press space, click your mouse or tap the screen to jump!
 
-Casual reminder: Avoid spooky skeletons."
+Casual reminder: Avoid spooky skeletons and ugly dragons."
 
 [node name="bgmPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
@@ -119,7 +118,48 @@ margin_right = 240.0
 margin_bottom = -201.0
 text = "0"
 
+[node name="nameEntry" type="LineEdit" parent="."]
+visible = false
+margin_left = 108.0
+margin_top = -77.0
+margin_right = 239.0
+margin_bottom = -47.0
+max_length = 8
+
+[node name="Label" type="Label" parent="nameEntry"]
+margin_left = -111.0
+margin_top = 8.0
+margin_right = -2.0
+margin_bottom = 26.0
+text = "Enter your name:"
+
+[node name="submitButton" type="Button" parent="nameEntry"]
+margin_left = 15.0
+margin_top = 35.0
+margin_right = 127.0
+margin_bottom = 72.0
+text = "Submit Score"
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[node name="highScoreTable" type="RichTextLabel" parent="."]
+margin_left = 2.0
+margin_top = -175.0
+margin_right = 223.0
+margin_bottom = -79.0
+
+[node name="restartButton" type="Button" parent="."]
+visible = false
+margin_left = 4.0
+margin_top = -41.0
+margin_right = 116.0
+margin_bottom = -4.0
+text = "Restart"
+
 [connection signal="area_entered" from="platformEnd" to="." method="_on_platformEnd_area_entered"]
 [connection signal="area_exited" from="platformStart" to="." method="_on_platformStart_area_exited"]
 [connection signal="timeout" from="spawnTimer" to="." method="_on_spawnTimer_timeout"]
 [connection signal="timeout" from="difficultyStep" to="." method="_on_difficultyStep_timeout"]
+[connection signal="pressed" from="nameEntry/submitButton" to="." method="_on_submitButton_pressed"]
+[connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]
+[connection signal="pressed" from="restartButton" to="." method="_on_restartButton_pressed"]
